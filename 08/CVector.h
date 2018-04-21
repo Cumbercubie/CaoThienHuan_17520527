@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-//#include <CMatrix.h>
+#include "CMatrix.h"
 using namespace std;
 class CMatrix;
 class CVector
@@ -14,7 +14,7 @@ public:
 	void Nhap();
 	friend istream& operator>>(istream&,CVector&);
 	friend ostream& operator<<(ostream&, CVector&);
-	friend CVector operator*(const CMatrix &mt, const CVector& vt);
+	friend CMatrix operator*(const CMatrix &mt, const CVector& vt);
 	CVector operator+(CVector);
 	CVector operator-(CVector);
 	int operator*(CVector); //TichVoHuong
