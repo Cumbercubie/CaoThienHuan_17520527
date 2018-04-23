@@ -18,8 +18,8 @@ public:
 	friend ostream& operator<<(ostream&, CDate&);
 	CDate operator+(int);
 	CDate operator-(int);
-	void IncreaseDay();
-	void DecreaseDay();
+	void IncreaseDay(CDate&);
+	void DecreaseDay(CDate&);
 	CDate operator++(int);
 	CDate operator--(int);
 };

@@ -6,10 +6,10 @@ class CMatrix
 {
 private:
 	int iHang, iCot;
-	long a[100][100];
+	long a[10][10];
 public:
 	CMatrix();
-	//CMatrix(int,int);
+	CMatrix(int, int);
 	//CMatrix(CMatrix&);
 	void Nhap();
 	friend istream& operator>>(istream&, CMatrix&);
@@ -18,5 +18,6 @@ public:
 	CMatrix operator+(CMatrix);
 	CMatrix operator*(CMatrix);
 	CMatrix operator-(CMatrix);
+	CMatrix operator=(CMatrix);
 };
 

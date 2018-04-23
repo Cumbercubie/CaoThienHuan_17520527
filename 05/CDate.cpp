@@ -12,6 +12,24 @@ CDate::CDate(const CDate &Date)
 	iThang = Date.iThang;
 	iNam = Date.iNam;
 }
+void CDate::IncreaseDay(CDate &Date)
+{
+	Date.iNgay++;
+	if (Date.iNgay > Date.DayinMonth())
+	{
+		if (Date.iThang == 12)
+		{
+			Date.iThang = 1;
+			Date.iNgay = 1;
+			Date.iNam++;
+		}
+		else
+		{
+			Date.iNgay = 1;
+			Date.iThang++;
+		}
+	}
+}
 CDate::CDate(int x = 1, int y = 1, int z = 1999)
 {
 	iNgay = x;
@@ -64,70 +82,45 @@ CDate CDate::operator+(int iSoNgay)
 	CDate Date(*this);
 	for (int i = 0; i < iSoNgay; i++)
 	{
-		IncreaseDay();
-		if (Date.isDayMax() == true)
-		{
-			Date.iThang += 1;
-			Date.iNgay += 1;
-		}
-		if (iThang == 12)
-		{
-			Date.iNam += 1;
-			Date.iThang = 1;
-			Date.iNgay = 1;
-		}
+		IncreaseDay(Date);
 	}
 	return Date;
 }
 CDate CDate::operator-(int iSoNgay)
 {
 	CDate Date(*this);
-	if (Date.iNgay <= iSoNgay)
-	{
-		Date.iThang -= 1;
-		Date.iNgay = Date.DayinMonth() - (iSoNgay - Date.iNgay);
-	}
-	else
-	{
-		Date.iNgay -= iSoNgay;
-	}
+	for (int i=0;i<iSoNgay;i++)
+		DecreaseDay(Date);
+
 	return Date;
 }
-void CDate::IncreaseDay()
+
+CDate CDate::operator++(int)
 {
-	iNgay++;
-	if (iNgay == this->DayinMonth())
+	IncreaseDay(*this);
+	return *this;
+}
+void CDate::DecreaseDay(CDate &Date)
+{
+	if (Date.iNgay <= 1)
 	{
-		if (iThang == 12)
+		if (Date.iThang == 1)
 		{
-			iThang = 1;
-			iNgay = 1;
-			iNam++;
+			Date.iThang = 12;
+			Date.iNgay = Date.DayinMonth();
+			Date.iNam -= 1;
 		}
 		else
 		{
-			iNgay = 1;
-			iThang++;
+			Date.iThang -= 1;
+			Date.iNgay = Date.DayinMonth();
 		}
 	}
-}
-CDate CDate::operator++(int)
-{
-	IncreaseDay();
-	return *this;
-}
-void CDate::DecreaseDay()
-{
-	if (iNgay == 1)
-	{
-		iThang -= 1;
-		iNgay = this->DayinMonth();
-	}
 	else
-		iNgay--;
+		Date.iNgay--;
 }
 CDate CDate::operator--(int)
 {
-	DecreaseDay();
+	DecreaseDay(*this);
 	return *this;
 }

@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <iostream>
 #include "CVector.h"
 CVector::CVector()
 {
@@ -16,7 +17,7 @@ void CVector::Nhap()
 	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
-		cout << "Nhap phan tu thu " << i + 1 <<": ";
+		cout << "Nhap phan tu thu " << i + 1 << ": ";
 		cin >> size[i];
 		cout << "\n";
 	}
@@ -29,9 +30,9 @@ istream& operator>>(istream& is, CVector& CV)
 ostream& operator<<(ostream& os, CVector& CV)
 {
 	os << "(";
-	for (int i = 0; i< CV.n-1; i++)
+	for (int i = 0; i< CV.n - 1; i++)
 		os << CV.size[i] << ",";
-	os << CV.size[CV.n-1];
+	os << CV.size[CV.n - 1];
 	os << ")\n";
 	return os;
 }
